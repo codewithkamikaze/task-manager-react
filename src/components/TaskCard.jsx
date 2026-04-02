@@ -1,9 +1,14 @@
-// src/TaskCard.jsx
-export default function TaskCard({ task, toggleTask, removeTask }) {
+import { useContext } from "react";
+import { TaskContext } from "../context/TaskContext";
+
+export default function TaskCard({ task }) {
+  const { toggleTask, removeTask } = useContext(TaskContext);
+
   const isDone = task.status === "done";
   const bg = isDone
     ? "bg-green-400/12 border-green-400/28"
     : "bg-yellow-400/14 border-yellow-400/30";
+
   return (
     <div
       className={`p-3 rounded-xl border ${bg} flex justify-between items-start`}
@@ -21,6 +26,7 @@ export default function TaskCard({ task, toggleTask, removeTask }) {
           </span>
         </div>
       </div>
+
       <div className="flex flex-col gap-1">
         <button
           onClick={() => toggleTask(task.id)}

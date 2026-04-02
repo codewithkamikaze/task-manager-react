@@ -1,6 +1,8 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useContext } from "react";
+import { TaskContext } from "../context/TaskContext";
 
-export default function TaskForm({ addTask, clearTasks }) {
+export default function TaskForm() {
+  const { addTask, clearTasks } = useContext(TaskContext);
   const [title, setTitle] = useState("");
   const [desc, setDesc] = useState("");
   const [error, setError] = useState("");
@@ -14,16 +16,13 @@ export default function TaskForm({ addTask, clearTasks }) {
     setError("");
   }, [title, desc, addTask]);
 
-  // ✅ Ctrl+Enter / Cmd+Enter shortcut
   useEffect(() => {
     const handleKey = (e) => {
       const typing =
         document.activeElement.tagName === "INPUT" ||
         document.activeElement.tagName === "TEXTAREA";
 
-      if (typing && (e.ctrlKey || e.metaKey) && e.key === "Enter") {
-        handleAdd();
-      }
+      if (typing && (e.ctrlKey || e.metaKey) && e.key === "Enter") handleAdd();
     };
 
     window.addEventListener("keydown", handleKey);
@@ -58,36 +57,23 @@ export default function TaskForm({ addTask, clearTasks }) {
 
       <div className="flex gap-2 justify-end mt-auto">
         <button
-          className="bg-white/12 px-4 py-2 rounded hover:ring-2 ring-blue-400 transition-all duration-200"
           onClick={handleReset}
+          className="bg-white/12 px-4 py-2 rounded hover:ring-2 ring-blue-400 transition-all duration-200"
         >
           Reset
         </button>
-
         <button
-          className="bg-blue-600 px-4 py-2 rounded hover:scale-95 transition-transform duration-150"
           onClick={handleAdd}
+          className="bg-blue-600 px-4 py-2 rounded hover:scale-95 transition-transform duration-150"
         >
           Add Task
         </button>
-
         <button
-          className="bg-red-600 px-4 py-2 rounded hover:scale-95 transition-transform duration-150"
           onClick={clearTasks}
+          className="bg-red-600 px-4 py-2 rounded hover:scale-95 transition-transform duration-150"
         >
           Clear All
         </button>
-      </div>
-
-      <div className="mt-3 text-sm text-white/60">
-        Tip: Press <span className="font-semibold">Ctrl + Enter</span>{" "}
-        (Windows/Linux) or <span className="font-semibold">Cmd + Enter</span>{" "}
-        (Mac) to add quickly.
-      </div>
-
-      <div className="mt-1 text-sm text-white/40">
-        Pending tasks are yellow. Mark as done to turn green. Keep titles short
-        and sweet!
       </div>
     </div>
   );

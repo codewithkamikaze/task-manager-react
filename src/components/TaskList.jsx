@@ -1,14 +1,10 @@
+import { useContext } from "react";
 import TaskCard from "./TaskCard";
+import { TaskContext } from "../context/TaskContext";
 
-export default function TaskList({
-  tasks,
-  filter,
-  setFilter,
-  search,
-  setSearch,
-  toggleTask,
-  removeTask,
-}) {
+export default function TaskList({ filter, setFilter, search, setSearch }) {
+  const { tasks } = useContext(TaskContext);
+
   const filters = ["all", "pending", "done"];
 
   const visible = tasks.filter((t) => {
@@ -32,8 +28,11 @@ export default function TaskList({
             <button
               key={f}
               onClick={() => setFilter(f)}
-              className={`px-3 py-1 rounded-br-md border border-white/14 text-sm transition-all duration-200 
-              ${filter === f ? "ring-2 ring-blue-400" : "bg-white/12 hover:ring-2 hover:ring-blue-400"} `}
+              className={`px-3 py-1 rounded-br-md border border-white/14 text-sm transition-all duration-200 ${
+                filter === f
+                  ? "ring-2 ring-blue-400"
+                  : "bg-white/12 hover:ring-2 hover:ring-blue-400"
+              }`}
             >
               {f.charAt(0).toUpperCase() + f.slice(1)}
             </button>
@@ -61,12 +60,7 @@ export default function TaskList({
 
       <div className="grid gap-3">
         {visible.map((t) => (
-          <TaskCard
-            key={t.id}
-            task={t}
-            toggleTask={toggleTask}
-            removeTask={removeTask}
-          />
+          <TaskCard key={t.id} task={t} />
         ))}
       </div>
     </div>

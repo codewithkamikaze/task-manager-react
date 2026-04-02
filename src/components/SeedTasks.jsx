@@ -1,27 +1,21 @@
+import { useContext } from "react";
+import { TaskContext } from "../context/TaskContext";
 import { createTask } from "../db";
 
-export default function SeedTasks({ db, setTasks, tasks }) {
+export default function SeedTasks() {
+  const { db, tasks, setTasks } = useContext(TaskContext);
+
   const handleSeed = async () => {
     if (!db) return;
-
     if (tasks.length > 0) {
       alert("Tasks already exist");
       return;
     }
 
     const samples = [
-      {
-        title: "Learn React",
-        description: "Hooks + Components",
-      },
-      {
-        title: "Build Task Manager",
-        description: "Using IndexedDB",
-      },
-      {
-        title: "Go to gym",
-        description: "Leg day 💪",
-      },
+      { title: "Learn React", description: "Hooks + Components" },
+      { title: "Build Task Manager", description: "Using IndexedDB" },
+      { title: "Go to gym", description: "Leg day 💪" },
     ];
 
     for (const s of samples) {
