@@ -1,6 +1,6 @@
 # Task Manager (React + IndexedDB)
 
-![Task Manager Screenshot](screenshot.png)  
+![Task Manager Screenshot](./src/assets/screenshot.png)  
 _(Add a screenshot of your app here)_
 
 A lightweight task manager built with **React**, using **IndexedDB** for local storage. Manage your tasks efficiently with filtering, search, and quick shortcuts.
