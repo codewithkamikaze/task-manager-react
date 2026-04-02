@@ -1,0 +1,9 @@
+@import "tailwindcss";
+
+body {
+  @apply bg-[#0b1020] text-[#e9eefc] font-sans p-6;
+}
+
+.toast {
+  @apply fixed right-4 bottom-4 bg-black/55 border border-white/18 backdrop-blur-md p-3 rounded-xl max-w-xs text-sm hidden;
+}
